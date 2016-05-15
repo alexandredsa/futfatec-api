@@ -17,11 +17,13 @@ public class Tabela {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Type(type = "objectid")
 	private String id;
-	@NotNull @Field
+	@NotNull
+	@Field
 	private String nomeCampeonato;
 	@Field
 	private String accessId;
-	@NotNull @Field
+	@NotNull
+	@Field
 	private List<Grupo> grupos;
 
 	public String getAccessId() {
@@ -50,6 +52,15 @@ public class Tabela {
 
 	public List<Grupo> getGrupos() {
 		return grupos;
+	}
+
+	public Grupo getBySigla(String sigla) {
+		for (Grupo grupo : this.grupos) {
+			if (grupo.getSigla().equals(sigla))
+				return grupo;
+		}
+
+		return null;
 	}
 
 	public void setGrupos(List<Grupo> grupos) {
