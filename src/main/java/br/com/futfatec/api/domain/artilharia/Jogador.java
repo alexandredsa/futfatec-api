@@ -15,7 +15,8 @@ public class Jogador {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Type(type = "objectid")
 	private String id;
-	@NotNull @Field
+	@NotNull
+	@Field
 	private String nome;
 	@Field
 	private int cartaoAmarelo;
@@ -26,7 +27,7 @@ public class Jogador {
 	@NotNull
 	@Field
 	private String time;
-	
+
 	@Field
 	private String idTabela;
 

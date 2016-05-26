@@ -29,11 +29,16 @@ public class ArtilhariaController {
 	public Jogador saveJogador(@RequestBody Jogador jogador) {
 		return jogadorRepository.save(jogador);
 	}
-
+	
+	/**
+	 * 
+	 * @param idTabela ID da Tabela da Competição
+	 * @return Retorna os 15 primeiros jogadores com mais gols na competição.
+	 */
 	@ResponseBody
 	@RequestMapping(value = "/get/{idTabela}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public List<Jogador> get(@PathVariable String idTabela) {
-		return jogadorRepository.findByIdTabelaOrderByGolsDesc(idTabela, new PageRequest(0, 2));
+		return jogadorRepository.findByIdTabelaOrderByGolsDesc(idTabela, new PageRequest(0, 15));
 	}
 
 }
