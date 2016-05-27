@@ -3,6 +3,22 @@ package br.com.futfatec.api.domain.auth;
 public class ValidationStatus {
 	private boolean permission;
 	private Role role;
+	private String leagueId;
+
+	
+	
+	public ValidationStatus(boolean permission, Role role, String leagueId) {
+		this.permission = permission;
+		this.role = role;
+		this.leagueId = leagueId;
+	}
+	
+	
+
+	public ValidationStatus() {
+	}
+
+
 
 	public boolean isPermission() {
 		return permission;
@@ -20,4 +36,11 @@ public class ValidationStatus {
 		this.role = role;
 	}
 
+	public String getLeagueId() {
+		return leagueId;
+	}
+
+	public void setLeagueId(String leagueId) {
+		this.leagueId = leagueId;
+	}
 }

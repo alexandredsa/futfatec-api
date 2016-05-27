@@ -1,8 +1,6 @@
 package br.com.futfatec.api.controller;
 
-import java.util.Arrays;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 import java.util.TreeSet;
 
@@ -18,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
-import br.com.futfatec.api.domain.artilharia.Jogador;
 import br.com.futfatec.api.domain.rodada.Etapa;
 import br.com.futfatec.api.domain.rodada.Partida;
 import br.com.futfatec.api.domain.rodada.Rodada;
@@ -83,7 +80,10 @@ public class RodadaController {
 		Rodada rodada = new Rodada();
 		rodada.setDia(cal.getTime().getTime());
 		rodada.setEtapa(Etapa.GRUPO);
-		rodada.setPartidas((TreeSet<Partida>) Arrays.asList(partida));
+		
+		TreeSet<Partida> t = new TreeSet<Partida>();
+		t.add(partida);
+		rodada.setPartidas(t);
 		return rodada;
 	}
 

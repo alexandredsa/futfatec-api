@@ -21,6 +21,9 @@ public class Credentials {
 	@Field
 	@NotNull
 	private Role role;
+	@Field
+	@NotNull
+	private String leagueId;
 
 	public String getAccessId() {
 		return accessId;
@@ -36,6 +39,14 @@ public class Credentials {
 
 	public void setRole(Role role) {
 		this.role = role;
+	}
+
+	public String getLeagueId() {
+		return leagueId;
+	}
+
+	public void setLeagueId(String leagueId) {
+		this.leagueId = leagueId;
 	}
 
 }

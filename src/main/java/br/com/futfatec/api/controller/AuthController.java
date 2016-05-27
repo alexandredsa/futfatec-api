@@ -44,6 +44,7 @@ public class AuthController {
 
 		validationStatus.setPermission(true);
 		validationStatus.setRole(credentials.getRole());
+		validationStatus.setLeagueId(credentials.getLeagueId());
 		return new ResponseEntity<ValidationStatus>(validationStatus, HttpStatus.OK);
 	}
 
