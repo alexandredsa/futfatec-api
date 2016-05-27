@@ -1,8 +1,5 @@
 package br.com.futfatec.api.controller;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -26,9 +23,9 @@ public class TabelaController {
 	private TabelaRepository tabelaRepository;
 
 	@ResponseBody
-	@RequestMapping(value = "/get/{accessId}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-	public ResponseEntity<?> get(@PathVariable String accessId) {
-		Tabela tabela = tabelaRepository.findOneByAccessId(accessId);
+	@RequestMapping(value = "/{leagueId}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	public ResponseEntity<?> get(@PathVariable String leagueId) {
+		Tabela tabela = tabelaRepository.findOneByLeagueId(leagueId);
 
 		return new ResponseEntity<Tabela>(tabela, tabela == null ? HttpStatus.NOT_FOUND : HttpStatus.OK);
 	}
@@ -41,29 +38,11 @@ public class TabelaController {
 
 		if (tabela == null)
 			return new ResponseEntity<Tabela>(tabela, HttpStatus.NOT_FOUND);
-			
+
 		Grupo grupo = tabela.getBySigla(siglaGrupo);
-		if(grupo.getTimes().contains(time))
-			grupo.getTimes().set(grupo.getTimes().indexOf(time), time);
+		grupo.getTimes().remove(time);
+		grupo.getTimes().add(time);
 
 		return new ResponseEntity<Tabela>(tabelaRepository.save(tabela), HttpStatus.CREATED);
 	}
-
-	@ResponseBody
-	@RequestMapping(value = "/", produces = MediaType.APPLICATION_JSON_UTF8_VALUE, method = RequestMethod.GET)
-	public Tabela test() {
-		Tabela t = new Tabela();
-		t.setNomeCampeonato("Amigos do Digão");
-
-		Grupo grupoA = new Grupo();
-		grupoA.setSigla("A");
-		Time realNair = new Time("Real Nair");
-		ArrayList<Time> times = new ArrayList<Time>();
-		times.add(realNair);
-		grupoA.setTimes(times);
-		t.setGrupos(Arrays.asList(grupoA));
-		t.setAccessId("wkdj2dnc03iic4");
-		return t;
-	}
-
 }

@@ -1,7 +1,6 @@
 package br.com.futfatec.api.domain.tabela;
 
-import java.util.ArrayList;
-import java.util.LinkedHashSet;
+import java.util.TreeSet;
 
 import javax.validation.constraints.NotNull;
 
@@ -15,7 +14,7 @@ public class Grupo {
 	private String sigla;
 	@NotNull
 	@Field
-	private ArrayList<Time> times;
+	private TreeSet<Time> times;
 
 	public String getSigla() {
 		return sigla;
@@ -25,11 +24,11 @@ public class Grupo {
 		this.sigla = sigla;
 	}
 
-	public ArrayList<Time> getTimes() {
+	public TreeSet<Time> getTimes() {
 		return times;
 	}
 
-	public void setTimes(ArrayList<Time> times) {
+	public void setTimes(TreeSet<Time> times) {
 		this.times = times;
 	}
 

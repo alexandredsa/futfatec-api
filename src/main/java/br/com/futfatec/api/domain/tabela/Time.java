@@ -6,7 +6,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
 @Document
-public class Time {
+public class Time implements Comparable<Time> {
 	@NotNull
 	@Field
 	private String nome;
@@ -75,12 +75,12 @@ public class Time {
 	public void setVitorias(int vitorias) {
 		this.vitorias = vitorias;
 	}
-	
+
 	@Override
 	public int hashCode() {
 		return toString().hashCode();
 	}
-	
+
 	@Override
 	public String toString() {
 		return this.nome;
@@ -89,5 +89,23 @@ public class Time {
 	@Override
 	public boolean equals(Object obj) {
 		return this.toString().equals(((Time) obj).toString());
+	}
+
+	public int getSaldoGols() {
+		return this.getGolsPro() - this.getGolsContra();
+	}
+
+	@Override
+	public int compareTo(Time t) {
+		if (t.getPontos() == this.getPontos())
+			if (t.getVitorias() == this.vitorias)
+				if (t.getSaldoGols() == this.getSaldoGols())
+					return this.nome.compareTo(t.getNome());
+				else
+					return t.getSaldoGols() - this.getSaldoGols();
+			else
+				return t.getVitorias() - this.vitorias;
+
+		return t.getPontos() - this.pontos;
 	}
 }

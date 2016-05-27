@@ -21,13 +21,17 @@ public class Tabela {
 	@Field
 	private String nomeCampeonato;
 	@Field
-	private String accessId;
+	private String leagueId;
 	@NotNull
 	@Field
 	private List<Grupo> grupos;
 
-	public String getAccessId() {
-		return accessId;
+	public String getLeagueId() {
+		return leagueId;
+	}
+
+	public void setLeagueId(String leagueId) {
+		this.leagueId = leagueId;
 	}
 
 	public String getId() {
@@ -36,10 +40,6 @@ public class Tabela {
 
 	public void setId(String id) {
 		this.id = id;
-	}
-
-	public void setAccessId(String accessId) {
-		this.accessId = accessId;
 	}
 
 	public String getNomeCampeonato() {
