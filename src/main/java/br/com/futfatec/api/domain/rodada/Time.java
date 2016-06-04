@@ -46,4 +46,8 @@ public class Time {
 		return true;
 	}
 
+	public void addGol() {
+		++this.gols;
+	}
+
 }

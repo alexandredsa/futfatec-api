@@ -46,6 +46,15 @@ public class Rodada {
 		return partidas;
 	}
 
+	public Partida getPartida(String horaInicio) {
+		for (Partida partida : this.partidas) {
+			if (partida.getHoraInicio().equals(horaInicio))
+				return partida;
+		}
+
+		return null;
+	}
+
 	public void setPartidas(TreeSet<Partida> partidas) {
 		this.partidas = partidas;
 	}

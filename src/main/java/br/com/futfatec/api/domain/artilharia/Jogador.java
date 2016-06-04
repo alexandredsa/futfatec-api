@@ -59,7 +59,12 @@ public class Jogador {
 	}
 
 	public void setCartaoAmarelo(int cartaoAmarelo) {
-		this.cartaoAmarelo = cartaoAmarelo;
+		if(this.cartaoAmarelo < 1)
+			this.cartaoAmarelo = cartaoAmarelo;
+		else{
+			this.cartaoAmarelo = 0;
+			this.cartaoVermelho = 1;
+		}
 	}
 
 	public int getCartaoVermelho() {

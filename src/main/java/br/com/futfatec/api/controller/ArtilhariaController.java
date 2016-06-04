@@ -38,7 +38,7 @@ public class ArtilhariaController {
 	@ResponseBody
 	@RequestMapping(value = "/{idTabela}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public List<Jogador> get(@PathVariable String idTabela) {
-		return jogadorRepository.findByIdTabelaOrderByGolsDesc(idTabela, new PageRequest(0, 15));
+		return jogadorRepository.findByIdTabelaAndGolsGreaterThanOrderByGolsDesc(idTabela,0, new PageRequest(0, 15));
 	}
 
 }

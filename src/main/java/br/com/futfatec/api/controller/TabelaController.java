@@ -32,7 +32,7 @@ public class TabelaController {
 
 	@ResponseBody
 	@RequestMapping(value = "/time/save/{idTabela}/{siglaGrupo}", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-	public ResponseEntity<?> saveJogador(@RequestBody Time time, @PathVariable String idTabela,
+	public ResponseEntity<?> save(@RequestBody Time time, @PathVariable String idTabela,
 			@PathVariable String siglaGrupo) {
 		Tabela tabela = tabelaRepository.findOne(idTabela);
 

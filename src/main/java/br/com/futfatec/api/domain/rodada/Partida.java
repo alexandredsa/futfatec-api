@@ -1,12 +1,11 @@
 package br.com.futfatec.api.domain.rodada;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.validation.constraints.NotNull;
 
-import org.springframework.data.mongodb.core.mapping.Field;
-
-public class Partida implements Comparable<Partida>{
+public class Partida implements Comparable<Partida> {
 	@NotNull
 	private Time timeA;
 	@NotNull
@@ -31,6 +30,17 @@ public class Partida implements Comparable<Partida>{
 		this.timeB = timeB;
 	}
 
+	public Time getTime(String nome) {
+		if (getTimeA().getNome().equalsIgnoreCase(nome))
+			return this.getTimeA();
+		
+		
+		if (getTimeB().getNome().equalsIgnoreCase(nome))
+			return this.getTimeB();
+		
+		return null;
+	}
+
 	public String getHoraInicio() {
 		return horaInicio;
 	}
@@ -40,11 +50,19 @@ public class Partida implements Comparable<Partida>{
 	}
 
 	public List<Evento> getEventos() {
+		if (eventos == null)
+			eventos = new ArrayList<Evento>();
+
 		return eventos;
 	}
 
 	public void setEventos(List<Evento> eventos) {
 		this.eventos = eventos;
+	}
+
+	public void addEvento(Evento evento) {
+		this.eventos = getEventos();
+		this.eventos.add(evento);
 	}
 
 	@Override

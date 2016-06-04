@@ -9,5 +9,5 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 import br.com.futfatec.api.domain.artilharia.Jogador;
 
 public interface JogadorRepository extends MongoRepository<Jogador, String> {
-	public List<Jogador> findByIdTabelaOrderByGolsDesc(String idTabela, Pageable pageable);
+	public List<Jogador> findByIdTabelaAndGolsGreaterThanOrderByGolsDesc(String idTabela, int gols, Pageable pageable);
 }
