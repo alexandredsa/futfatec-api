@@ -18,6 +18,7 @@ import br.com.futfatec.api.domain.artilharia.Jogador;
 import br.com.futfatec.api.domain.rodada.Evento;
 import br.com.futfatec.api.domain.rodada.Partida;
 import br.com.futfatec.api.domain.rodada.Rodada;
+import br.com.futfatec.api.domain.rodada.Status;
 import br.com.futfatec.api.domain.rodada.Time;
 import br.com.futfatec.api.domain.rodada.TipoEvento;
 import br.com.futfatec.api.repository.JogadorRepository;
@@ -55,16 +56,13 @@ public class RodadaController {
 		Rodada rodada = rodadaRepository.findByIdTabelaAndDia(idTabela, dia);
 		return new ResponseEntity<Rodada>(rodada, rodada == null ? HttpStatus.NOT_FOUND : HttpStatus.OK);
 	}
-
+	
 	@ResponseBody
-	@RequestMapping(value = "/ex/evento/", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-	public ResponseEntity<?> getEventoExemplo() {
-		Evento evento = new Evento();
-		Jogador jogador = new Jogador();
-		jogador.setNome("teste");
-		evento.setJogador(jogador);
-		evento.setTipo(TipoEvento.GOL);
-		return new ResponseEntity<Evento>(evento, HttpStatus.OK);
+	@RequestMapping(value = "/partida/{rodadaId}/{horaInicio}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	public ResponseEntity<?> getPartida(@PathVariable String rodadaId, @PathVariable String horaInicio) {
+		Rodada rodada = rodadaRepository.findOne(rodadaId);
+		Partida p = rodada.getPartida(horaInicio);
+		return new ResponseEntity<Partida>(p, p == null ? HttpStatus.NOT_FOUND : HttpStatus.OK);
 	}
 
 	@ResponseBody
@@ -85,10 +83,16 @@ public class RodadaController {
 
 		try {
 			Partida partida = rodada.getPartida(horaInicio);
+			
+			if(partida.getStatus() == Status.FINALIZADO){
+				return new ResponseEntity<Rodada>(rodada, HttpStatus.FORBIDDEN);
+			}
+			
 			Jogador jogador = jogadorRepository.findOne(evento.getJogador().getId());
 			switch (evento.getTipo()) {
 			case GOL:
 				jogador.setGols(jogador.getGols() + 1);
+				partida.getTime(jogador.getTime()).addGol();
 				break;
 			case CARTAO_AMARELO:
 				jogador.setCartaoAmarelo(jogador.getCartaoAmarelo() + 1);
@@ -101,7 +105,6 @@ public class RodadaController {
 
 			evento.setJogador(jogador);
 			partida.addEvento(evento);
-			partida.getTime(jogador.getTime()).addGol();
 			rodada.setPartida(partida);
 
 

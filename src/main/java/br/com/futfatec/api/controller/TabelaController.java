@@ -31,17 +31,15 @@ public class TabelaController {
 	}
 
 	@ResponseBody
-	@RequestMapping(value = "/time/save/{idTabela}/{siglaGrupo}", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-	public ResponseEntity<?> save(@RequestBody Time time, @PathVariable String idTabela,
-			@PathVariable String siglaGrupo) {
+	@RequestMapping(value = "/time/save/{idTabela}", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	public ResponseEntity<?> save(@RequestBody Time time, @PathVariable String idTabela) {
 		Tabela tabela = tabelaRepository.findOne(idTabela);
 
 		if (tabela == null)
 			return new ResponseEntity<Tabela>(tabela, HttpStatus.NOT_FOUND);
 
-		Grupo grupo = tabela.getBySigla(siglaGrupo);
-		grupo.getTimes().remove(time);
-		grupo.getTimes().add(time);
+		Grupo grupo = tabela.getByTime(time);
+		grupo.addTime(time);
 
 		return new ResponseEntity<Tabela>(tabelaRepository.save(tabela), HttpStatus.CREATED);
 	}

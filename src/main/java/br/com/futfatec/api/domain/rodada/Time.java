@@ -7,6 +7,7 @@ import br.com.futfatec.api.domain.artilharia.Jogador;
 public class Time {
 	private String nome;
 	private int gols;
+	@Deprecated
 	private List<Jogador> jogadores;
 
 	public String getNome() {

@@ -33,6 +33,26 @@ public class Grupo {
 	}
 
 	public void addTime(Time time) {
+		Time t = getTime(time.getNome());
+		if(t != null)
+			this.times.remove(t);
+		
 		this.times.add(time);
+	}
+
+	public boolean hasTime(Time time) {
+		for (Time t : times) {
+			if (t.equals(time))
+				return true;
+		}
+		return false;
+	}
+
+	public Time getTime(String nome) {
+		for (Time t : times) {
+			if (t.getNome().equalsIgnoreCase(nome))
+				return t;
+		}
+		return null;
 	}
 }

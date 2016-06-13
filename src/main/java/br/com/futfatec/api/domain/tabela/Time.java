@@ -88,7 +88,12 @@ public class Time implements Comparable<Time> {
 
 	@Override
 	public boolean equals(Object obj) {
-		return this.toString().equals(((Time) obj).toString());
+		if (!(obj instanceof Time))
+			return false;
+
+		Time t = (Time) obj;
+
+		return t.getNome().equalsIgnoreCase(this.nome);
 	}
 
 	public int getSaldoGols() {

@@ -13,6 +13,7 @@ public class Partida implements Comparable<Partida> {
 	@NotNull
 	private String horaInicio;
 	private List<Evento> eventos;
+	private Status status;
 
 	public Time getTimeA() {
 		return timeA;
@@ -63,6 +64,14 @@ public class Partida implements Comparable<Partida> {
 	public void addEvento(Evento evento) {
 		this.eventos = getEventos();
 		this.eventos.add(evento);
+	}
+
+	public Status getStatus() {
+		return status;
+	}
+
+	public void setStatus(Status status) {
+		this.status = status;
 	}
 
 	@Override

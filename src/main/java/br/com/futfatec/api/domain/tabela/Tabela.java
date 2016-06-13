@@ -63,8 +63,28 @@ public class Tabela {
 		return null;
 	}
 
+	public Grupo getByTime(Time time) {
+		for (Grupo grupo : grupos) {
+			if (grupo.hasTime(time))
+				return grupo;
+		}
+
+		return null;
+	}
+
 	public void setGrupos(List<Grupo> grupos) {
 		this.grupos = grupos;
+	}
+
+	public Time getTime(String nome) {
+		for (Grupo grupo : grupos) {
+			for (Time time : grupo.getTimes()) {
+				if (time.getNome().equalsIgnoreCase(nome))
+					return time;
+			}
+		}
+
+		return null;
 	}
 
 }

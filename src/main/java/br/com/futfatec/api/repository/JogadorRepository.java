@@ -10,4 +10,6 @@ import br.com.futfatec.api.domain.artilharia.Jogador;
 
 public interface JogadorRepository extends MongoRepository<Jogador, String> {
 	public List<Jogador> findByIdTabelaAndGolsGreaterThanOrderByGolsDesc(String idTabela, int gols, Pageable pageable);
+	
+	public List<Jogador> findByTime(String time);
 }

@@ -30,6 +30,13 @@ public class Jogador {
 
 	@Field
 	private String idTabela;
+	
+	
+
+	public Jogador(String nome, String time) {
+		this.nome = nome;
+		this.time = time;
+	}
 
 	public String getId() {
 		return id;
